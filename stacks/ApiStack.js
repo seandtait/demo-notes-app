@@ -12,10 +12,13 @@ export function ApiStack({ stack, app }) {
                 permissions: [table],
                 environment: {
                     TABLE_NAME: table.tableName,
+                    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
                 },
             },
         },
         routes: {
+            "POST /billing": "functions/billing.main",
+
             "POST /notes": "functions/create.main",
             "GET /notes/{id}": "functions/get.main",
             "GET /notes": "functions/list.main",
